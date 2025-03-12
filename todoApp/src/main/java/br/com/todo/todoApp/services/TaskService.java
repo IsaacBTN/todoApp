@@ -15,7 +15,7 @@ public class TaskService {
     @Autowired
     TaskRepository taskRepository;
 
-    public Task createTask (Task task) throws Exception{
+    public Task createTask (Task task){
         try{
         if(task.getName()==null || task.getName().isEmpty()){
             throw new IllegalArgumentException("Dados para criação de task invalidos!");
@@ -27,7 +27,7 @@ public class TaskService {
         }
     }
 
-    public void deleteTaskByName(Long id){
+    public void deleteTaskById(Long id){
         if(!taskRepository.existsById(id)){
             throw new IllegalArgumentException("Task com o id : " + id + "não foi encontrada");
         } taskRepository.deleteById(id);
