@@ -27,10 +27,10 @@ public class TaskController {
         }
     }
 
-    @GetMapping("/{name}")
-    public ResponseEntity<Object> getTask (@PathVariable String name){
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getTask (@PathVariable Long id){
         try {
-            Task task = taskService.getTaskByName(name);
+            Task task = taskService.getTaskById(id);
             return ResponseEntity.status(HttpStatus.OK).body(task);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Task não encontrada, " + e.getMessage());
@@ -43,10 +43,10 @@ public class TaskController {
         return  ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{name}")
-    public ResponseEntity<Object> updateTask (@PathVariable String name,@RequestBody Task updatedTask){
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateTask (@PathVariable Long id,@RequestBody Task updatedTask){
         try {
-            Task task = taskService.updateTaskByName(name, updatedTask);
+            Task task = taskService.updateTaskById(id, updatedTask);
             return ResponseEntity.status(HttpStatus.OK).body(task);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao atualizar task: " + e.getMessage());

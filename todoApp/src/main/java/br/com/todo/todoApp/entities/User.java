@@ -1,9 +1,9 @@
 package br.com.todo.todoApp.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class User {
@@ -18,11 +18,18 @@ public class User {
 
     private String password;
 
-    public User(Long id, String name, String email, String password) {
+    @OneToMany(mappedBy = "user")
+    private List<Task> taskList = new ArrayList<>();
+
+    public User(Long id, String name, String email, String password, List<Task> taskList) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.taskList = taskList;
+    }
+
+    public User() {
     }
 
     public Long getId() {

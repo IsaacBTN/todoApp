@@ -33,14 +33,14 @@ public class TaskService {
         } taskRepository.deleteById(id);
     }
 
-    public Task getTaskByName(String name){
-        Task task = taskRepository.findByName(name)
-                .orElseThrow(() -> new NoSuchElementException("Task com o id : " + name + "não foi encontrada"));
+    public Task getTaskById(Long id){
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Task com o id : " + id + "não foi encontrada"));
         return task;
     }
 
-    public Task updateTaskByName(String name, Task updatedTask){
-        Task task = taskRepository.findByName(name)
+    public Task updateTaskById(Long id, Task updatedTask){
+        Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Task não encontrada"));
 
         if (updatedTask.getName() != null && !taskRepository.existsByName(updatedTask.getName())){
